@@ -12,5 +12,6 @@ public class Application {
         DocumentController docController = new DocumentController();
         docController.loadFolder(docController.pathToFileObj(documentToRead));
 
+        docController.parseFolder();
     }
 }

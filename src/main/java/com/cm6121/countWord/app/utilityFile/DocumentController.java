@@ -16,7 +16,7 @@ public class DocumentController {
         File nFile = new File(path);
         //Path pathI = Path.of(path);
         //File newFile = pathI.toFile();
-        return newFile;
+        return nFile;
     }
 
     public void loadFolder(final File folder) {
@@ -27,6 +27,13 @@ public class DocumentController {
             else{
                 System.out.println(" is not a csv file");
             }
+        }
+    }
+
+    public void parseFolder() {
+        System.out.println("The number of CSV documents in the folder is " + DocumentsList.size());
+        for (Document doc : DocumentsList){
+            doc.parse();
         }
     }
 }
