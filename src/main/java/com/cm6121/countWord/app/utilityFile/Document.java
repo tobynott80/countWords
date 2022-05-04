@@ -1,6 +1,8 @@
 package com.cm6121.countWord.app.utilityFile;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Document {
@@ -11,7 +13,7 @@ public class Document {
 
     private File docFile;
 
-    private int docCreationYear;
+    private String docCreation;
 
     private String docTitle;
 
@@ -26,10 +28,11 @@ public class Document {
 
     public void parse() {
         FileReader fileReader = new FileReader();
-        List<String[]> list = fileReader.readCSVMethod1(docFile);
-        for (String[] str : list) {
-            System.out.println(str);
-        }
+
+        String[] list = fileReader.readCSVMethod1(docFile).get(0);
+        this.docTitle = list[0];
+        this.docCreation = list[2];
+        this.docText = list[1];
 
     }
 }

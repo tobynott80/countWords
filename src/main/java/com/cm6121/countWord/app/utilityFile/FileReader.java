@@ -27,7 +27,7 @@ public class FileReader {
                 reader.skip(1);
                 strings = reader.readAll();
             }
-            System.out.println(strings);
+            //System.out.println(strings);
         } catch (IOException | CsvException e) {
             System.out.println(e.getStackTrace());
         }
