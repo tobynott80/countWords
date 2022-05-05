@@ -13,5 +13,10 @@ public class Application {
         docController.loadFolder(docController.pathToFileObj(documentToRead));
 
         docController.parseFolder();
+
+        docController.countAllWords();
+
+        docController.countAllWordsInCorpus();
+
     }
 }
