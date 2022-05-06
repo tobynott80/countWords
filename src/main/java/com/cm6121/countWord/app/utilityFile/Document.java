@@ -82,7 +82,7 @@ public class Document {
     }
 
     public void cleanText(){
-        docText = docText.toLowerCase(); //
+        docText = docText.toLowerCase(); //make every character lowercase
         docText = docText.replaceAll("\\p{P}", " "); //remove all punctuation
         docText = docText.replaceAll("\\s{2}", " ").trim(); // remove instances of double spaces
     }

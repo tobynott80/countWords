@@ -61,6 +61,27 @@ public class DocumentController {
         }
     }
 
+    public void displayDocumentsWordCount(){
+        System.out.println("Please select which document you wish to find the word count of");
+        Scanner sc = new Scanner(System.in);
+        Integer usrSelection;
+        do {
+            System.out.println();
+            for (int i = 0; i < DocumentsList.toArray().length; i++) {
+                System.out.println(i + ". " + DocumentsList.get(i).getDocName() + "  (" + DocumentsList.get(i).getDocTitle() + ")");
+            }
+            while (!sc.hasNextInt()) { //ensuring a valid number is entered.
+                System.out.println("Please enter a valid number");
+                sc.next();
+            }
+            usrSelection = sc.nextInt();
+        } while (usrSelection < 0 || usrSelection > DocumentsList.toArray().length);
+        for(String key: DocumentsList.get(usrSelection).getSortedMap().keySet()){
+            System.out.println("Word : " + key + ", Value : " + DocumentsList.get(usrSelection).getSortedMap().get(key));
+        }
+
+    }
+
     public void countAllWords() {
         for (Document doc : DocumentsList){
             try {
@@ -96,9 +117,37 @@ public class DocumentController {
                         LinkedHashMap::new
                 ));
         // reference end
+    }
 
-        for (String key : sortedCorpusCount.keySet()){
-                System.out.println("Word : " + key + ", Value : " + sortedCorpusCount.get(key));
+    public void displayCorpusWordCount() {
+        for (int i = sortedCorpusCount.size()-1; i > sortedCorpusCount.size()-20; i--) {
+            String[] key = sortedCorpusCount.keySet().toArray(new String[0]);
+            System.out.println("Word : " + key[i] + ", Value : " + sortedCorpusCount.get(key[i]));
+        }
+
+    }
+
+    public void searchWordCount() {
+        System.out.println("Please enter the search word");
+        Scanner inputObj = new Scanner(System.in);
+        String usrInput = inputObj.nextLine().toLowerCase();
+        usrInput = usrInput.replaceAll("\\p{P}", " "); //remove all punctuation
+        usrInput = usrInput.replaceAll("\\s{2}", " ").trim(); // remove instances of double spaces
+
+        if (sortedCorpusCount.containsKey(usrInput)){
+            System.out.println("The number of times the word " + usrInput + " appears in the whole corpus is " + sortedCorpusCount.get(usrInput));
+
+            for (Document doc : DocumentsList){
+                if (doc.getSortedMap().containsKey(usrInput)){
+                    System.out.println("The number of times the word " + usrInput + " appears in " + doc.getDocTitle() + " is " + doc.getSortedMap().get(usrInput));
+                } else {
+                    System.out.println("The word " + usrInput + " doesn't occur in " + doc.getDocTitle());
+                }
             }
+
+        } else {
+            System.out.println("The word " + usrInput + "doesn't occur in any documents - perhaps check your spelling");
+        }
+
     }
 }
