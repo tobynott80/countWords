@@ -29,7 +29,7 @@ public class Application {
                 System.out.println("1. Display the names and number of documents");
                 System.out.println("2. Display the number of occurrences of the words for each document");
                 System.out.println("3. Search for the occurrences of a particular word in each document");
-                System.out.println("4. Display the number of occurrences for each word in the whole corpus");
+                System.out.println("4. Display the number of occurrences for each word in the whole corpus (Top 20 - Descending Order)");
                 System.out.println("5. Quit");
                 while (!sc.hasNextInt()) { //ensuring a valid number is entered.
                     System.out.println("Please enter a number between 1 and 5");

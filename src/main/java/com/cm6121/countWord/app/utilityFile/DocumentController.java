@@ -13,10 +13,9 @@ import java.util.stream.Collectors;
 
 public class DocumentController {
 
-    private HashMap<String, Integer> unsortedCorpusCount = new HashMap<>();
     private Map<String, Integer> sortedCorpusCount;
 
-    private ArrayList<Document> DocumentsList = new ArrayList<Document>();
+    private ArrayList<Document> DocumentsList;
 
     //Constructor
     public DocumentController() {
@@ -94,7 +93,7 @@ public class DocumentController {
     }
 
     public void countAllWordsInCorpus() {
-        unsortedCorpusCount = new HashMap<>();
+        HashMap<String, Integer> unsortedCorpusCount = new HashMap<>();
         for(Document doc : DocumentsList){
             for (String key : doc.getSortedMap().keySet()){
                 if (unsortedCorpusCount.containsKey(key)) { //if word already occurs in hashmap
@@ -108,7 +107,7 @@ public class DocumentController {
         // Following code referenced
         // David Landup (Feb 2021) StackAbuse Available At: https://stackabuse.com/how-to-sort-a-hashmap-by-value-in-java/ (Accessed May 2022)
         // Sorting a hashmap into a LinkedHashMap
-        sortedCorpusCount = this.unsortedCorpusCount.entrySet().stream()
+        sortedCorpusCount = unsortedCorpusCount.entrySet().stream()
                 .sorted(Comparator.comparingInt(e -> e.getValue()))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
@@ -146,7 +145,7 @@ public class DocumentController {
             }
 
         } else {
-            System.out.println("The word " + usrInput + "doesn't occur in any documents - perhaps check your spelling");
+            System.out.println("The word " + usrInput + " doesn't occur in any documents - perhaps check your spelling");
         }
 
     }
