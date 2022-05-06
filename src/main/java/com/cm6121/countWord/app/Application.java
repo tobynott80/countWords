@@ -16,6 +16,7 @@ public class Application {
         docController.parseFolder();
         docController.countAllWords();
         docController.countAllWordsInCorpus();
+        docController.createCSV();
 
 
 

@@ -76,15 +76,17 @@ public class Document {
         FileReader fileReader = new FileReader();
 
         String[] list = fileReader.readCSVMethod1(docFile).get(0);
-        this.docTitle = list[0];
-        this.docCreation = list[2];
+        this.docTitle = list[0].trim();
+        this.docCreation = list[2].trim();
         this.docText = list[1];
     }
 
     public void cleanText(){
         docText = docText.toLowerCase(); //make every character lowercase
         docText = docText.replaceAll("\\p{P}", " "); //remove all punctuation
-        docText = docText.replaceAll("\\s{2}", " ").trim(); // remove instances of double spaces
+        docText = docText.replaceAll("\\s+", " ").trim(); // remove instances of double spaces
+        docTitle = docTitle.replaceAll("\\s+", " ").trim(); // remove instances of double spaces in the title
+
     }
     public void countWords(){
         this.wordCount = new HashMap<String,Integer>(); //clear word count hash map

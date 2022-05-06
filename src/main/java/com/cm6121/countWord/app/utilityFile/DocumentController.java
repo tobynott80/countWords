@@ -132,7 +132,7 @@ public class DocumentController {
         Scanner inputObj = new Scanner(System.in);
         String usrInput = inputObj.nextLine().toLowerCase();
         usrInput = usrInput.replaceAll("\\p{P}", " "); //remove all punctuation
-        usrInput = usrInput.replaceAll("\\s{2}", " ").trim(); // remove instances of double spaces
+        usrInput = usrInput.replaceAll("\\s+", " ").trim(); // remove instances of double spaces
 
         if (sortedCorpusCount.containsKey(usrInput)){
             System.out.println("The number of times the word " + usrInput + " appears in the whole corpus is " + sortedCorpusCount.get(usrInput));
@@ -148,6 +148,15 @@ public class DocumentController {
         } else {
             System.out.println("The word " + usrInput + "doesn't occur in any documents - perhaps check your spelling");
         }
+
+    }
+
+    public void createCSV() {
+        WriterCSV csvWriter = new WriterCSV();
+        for(Document doc: DocumentsList){
+            csvWriter.createAllWordsFileFromDoc(doc);
+        }
+        csvWriter.createWholeCorpusCSV(this.sortedCorpusCount);
 
     }
 }
