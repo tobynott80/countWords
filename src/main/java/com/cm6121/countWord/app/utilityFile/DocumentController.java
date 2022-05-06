@@ -49,15 +49,19 @@ public class DocumentController {
     }
 
     public void parseFolder() {
-        System.out.println("The number of CSV documents in the folder is " + DocumentsList.size());
         for (Document doc : DocumentsList){
             doc.parse();
+        }
+    }
+
+    public void displayDocumentsParsed() {
+        System.out.println("The number of CSV documents in the folder is " + DocumentsList.size());
+        for (Document doc : DocumentsList){
             System.out.println("The file name is " + doc.getDocName() + ", the title is " + doc.getDocTitle() + ", the creation date is " + doc.getDocCreation());
         }
     }
 
     public void countAllWords() {
-
         for (Document doc : DocumentsList){
             try {
                 doc.countWords();
@@ -65,9 +69,6 @@ public class DocumentController {
                 System.out.println("Could not count words in " + doc.getDocName());
                 System.out.println(e.getStackTrace());
             }
-            //for (String key : doc.getSortedMap().keySet()){
-            //    System.out.println("Word : " + key + ", Value : " + doc.getWordCount().get(key));
-            //}
         }
     }
 
