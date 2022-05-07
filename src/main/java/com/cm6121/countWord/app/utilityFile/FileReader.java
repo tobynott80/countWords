@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class FileReader {
         List<String[]> strings = new ArrayList<>();
         try {
             CSVReader reader = new CSVReader(
-                    new InputStreamReader(new FileInputStream(file), "UTF-8"));
+                    new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
             {
                 reader.skip(1);
                 strings = reader.readAll();

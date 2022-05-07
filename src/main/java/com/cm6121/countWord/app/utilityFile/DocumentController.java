@@ -9,23 +9,16 @@ public class DocumentController {
 
     private Map<String, Integer> sortedCorpusCount;
 
-    private ArrayList<Document> DocumentsList;
+    private final ArrayList<Document> DocumentsList;
 
     //Constructor
     public DocumentController() {
         this.DocumentsList = new ArrayList<Document>();
     }
 
-    //getters
-    public ArrayList<Document> getDocumentsList() {
-        return DocumentsList;
-    }
-
 
     public File pathToFileObj(final String path) {
         File nFile = new File(path);
-        //Path pathI = Path.of(path);
-        //File newFile = pathI.toFile();
         return nFile;
     }
 
