@@ -1,13 +1,6 @@
 package com.cm6121.countWord.app.utilityFile;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,7 +20,7 @@ public class Document {
 
     private Map<String, Integer> sortedMap;
 
-    private HashMap<String,Integer> wordCount = new HashMap<>();
+    private HashMap<String, Integer> wordCount = new HashMap<>();
 
 
     //getters
@@ -65,7 +58,6 @@ public class Document {
     }
 
 
-
     public Document(final File fileI) {
         this.docFile = fileI;
         this.docName = fileI.getName();
@@ -81,24 +73,25 @@ public class Document {
         this.docText = list[1];
     }
 
-    public void cleanText(){
+    public void cleanText() {
         docText = docText.toLowerCase(); //make every character lowercase
         docText = docText.replaceAll("\\p{P}", " "); //remove all punctuation
         docText = docText.replaceAll("\\s+", " ").trim(); // remove instances of double spaces
         docTitle = docTitle.replaceAll("\\s+", " ").trim(); // remove instances of double spaces in the title
 
     }
-    public void countWords(){
-        this.wordCount = new HashMap<String,Integer>(); //clear word count hash map
+
+    public void countWords() {
+        this.wordCount = new HashMap<String, Integer>(); //clear word count hash map
         try { //try to clean document text
             this.cleanText();
         } catch (Exception e) {
             System.out.println("Could not clean document text");
             System.out.println(e.getStackTrace());
         }
-        String [] splitText = this.docText.split(" "); //split text into array along spaced characters
-        for(String word: splitText){  // for each word in the list
-            if(word.length()>1){ //ensure that only words longer than 1 character are counted
+        String[] splitText = this.docText.split(" "); //split text into array along spaced characters
+        for (String word : splitText) {  // for each word in the list
+            if (word.length() > 1) { //ensure that only words longer than 1 character are counted
                 if (wordCount.containsKey(word)) { //if word already occurs in hashmap
                     wordCount.put(word, wordCount.get(word) + 1);  //increase count
                 } else { //if word hasn't yet occurred
@@ -115,7 +108,9 @@ public class Document {
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue,
-                        (a, b) -> { throw new AssertionError(); },
+                        (a, b) -> {
+                            throw new AssertionError();
+                        },
                         LinkedHashMap::new
                 ));
         // reference end

@@ -1,11 +1,11 @@
 package com.cm6121.countWord.app.utilityFile;
 
 
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
@@ -15,39 +15,39 @@ import java.util.Map;
 
 public class WriterCSV {
 
-    public String createDirectory(){
-        String pathFile = System.getProperty("user.home")+"/StudentCSVSaved/";
+    public String createDirectory() {
+        String pathFile = System.getProperty("user.home") + "/StudentCSVSaved/";
         File dir = new File(pathFile);
-        if(!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         return pathFile;
     }
 
-    public void createAllWordsFileFromDoc (Document doc){
+    public void createAllWordsFileFromDoc(Document doc) {
 
         this.createDirectory();
 
-        String pathFile = System.getProperty("user.home")+"/StudentCSVSaved/";
+        String pathFile = System.getProperty("user.home") + "/StudentCSVSaved/";
         String docTitle = doc.getDocTitle().replaceAll("\\s", "_").trim();
-        File file = new File(pathFile.toString() + docTitle + "_allWords.csv");
+        File file = new File(pathFile + docTitle + "_allWords.csv");
 
-        Map<String,Integer> sortedHashMap = null;
+        Map<String, Integer> sortedHashMap = null;
         try {
             sortedHashMap = doc.getSortedMap();
         } catch (Exception e) {
 
-            System.out.println("Could not find sorted hashmap of word count for file "+doc.getDocTitle());
+            System.out.println("Could not find sorted hashmap of word count for file " + doc.getDocTitle());
         }
         try {
             FileOutputStream outputStream = new FileOutputStream(file, false);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
             BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
             bufferedWriter.write(doc.getDocTitle());
             bufferedWriter.write(",");
             bufferedWriter.write(doc.getDocCreation());
             bufferedWriter.newLine();
-            for(String key: sortedHashMap.keySet()){
+            for (String key : sortedHashMap.keySet()) {
                 bufferedWriter.write(key);
                 bufferedWriter.write(",");
                 bufferedWriter.write(sortedHashMap.get(key).toString());
@@ -61,20 +61,20 @@ public class WriterCSV {
     }
 
 
-    public void createWholeCorpusCSV(Map<String,Integer> sortedHashMap) {
+    public void createWholeCorpusCSV(Map<String, Integer> sortedHashMap) {
         this.createDirectory();
 
-        String pathFile = System.getProperty("user.home")+"/StudentCSVSaved/";
-        File file = new File(pathFile.toString() + "CSVAllDocuments_allWords.csv");
+        String pathFile = System.getProperty("user.home") + "/StudentCSVSaved/";
+        File file = new File(pathFile + "CSVAllDocuments_allWords.csv");
 
         try {
             FileOutputStream outputStream = new FileOutputStream(file, false);
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
             BufferedWriter bufferedWriter = new BufferedWriter(outputStreamWriter);
             bufferedWriter.write("Word, Number of Occurrences");
             bufferedWriter.newLine();
 
-            for (int i = sortedHashMap.size()-1; i > 0; i--) {
+            for (int i = sortedHashMap.size() - 1; i > 0; i--) {
                 String[] key = sortedHashMap.keySet().toArray(new String[0]);
 
                 bufferedWriter.write(key[i]);

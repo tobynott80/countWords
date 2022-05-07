@@ -15,10 +15,11 @@ public class FileReader {
      * Method that will return a List of Array of String that will contains the CSV content.
      * The method skip the first line of the CSV
      * You can implement another method, or use this one to read a CSV. This method is using OpenCSV
-     * @param file, the CSV file
+     *
+     * @param file the CSV file
      * @return a List of String array
      */
-    public List<String[]> readCSVMethod1 (File file) {
+    public List<String[]> readCSVMethod1(File file) {
         List<String[]> strings = new ArrayList<>();
         try {
             CSVReader reader = new CSVReader(
@@ -37,13 +38,13 @@ public class FileReader {
     /**
      * This method is used in several tests to return a list of files that is contained in a folder
      * This method should not be changed.
+     *
      * @param folder String that represent the path of the folder that we want the list of files
      * @return a array of files
      */
-    public static File[] getResourceFolderFiles (String folder) {
+    public static File[] getResourceFolderFiles(String folder) {
         return new File(folder).listFiles();
     }
-
 
 
 }
